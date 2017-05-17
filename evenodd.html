@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript</title>
+
+	<script lang="javascript">
+		function switch_statement() {
+			var str = document.getElementById("str").value;
+			var output = document.getElementById("outputlabel");
+			var result = "";
+
+			output.style.color = "black";
+			switch(str) {
+				case "alex":
+					result = "Worked in copyright and music industries."
+					break;
+				case "greg":
+					result = "Loves software development."
+					break;
+				case "pierson":
+					result = "Is short."
+					break;
+				case "lisa":
+					result = "Is very supportive."
+					break;
+				default:
+					result = "Who?"
+					break;
+			}
+
+			output.innerHTML = result;
+		}
+
+		function button_click() {
+			var nbr = document.getElementById("nbr").value;
+			var output = document.getElementById("outputlabel");
+			var result = "";
+
+			if(parseInt(nbr)) {
+				output.style.color = "black";
+				result = (nbr % 2 == 0) ? "The number you entered is even!" : "The number you entered is odd!";
+			} else {
+				output.style.color = "red";
+				result = "Error! Enter an integer!";
+			}
+
+			output.innerHTML = result;
+		}
+	</script>
+</head>
+<body>
+	<div style="background-color: rgb(245, 245, 245); width: 30%; height: 110px; margin: auto; text-align: center; padding-top: 55px;">
+		<div>
+			<input id="nbr" type="text" placeholder="Enter an integer" />
+			<button onclick="button_click()">Calculate</button>
+
+			<input id="str" type="text" placeholder="Enter a name" />
+			<button onclick="switch_statement()">Check</button>
+		</div>
+		<div>
+			<label id="outputlabel"></label>
+		</div>
+	</div>
+</body>
+</html>

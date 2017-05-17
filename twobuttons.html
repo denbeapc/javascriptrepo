@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript</title>
+
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		#plusbutton {
+			text-align: center;
+			font-size: 36pt;
+			height: 100px;
+			width: 70px;
+		}
+
+		#minusbutton {
+			text-align: center;
+			font-size: 36pt;
+			height: 100px;
+			width: 70px;
+		}
+
+		#numberlabel {
+			margin-left: 30px;
+			margin-right: 30px;
+		}
+	</style>
+
+	<script lang="javascript">
+		function button_click(clicked_id) {
+			var nbr = document.getElementById("numberlabel");
+
+			switch(clicked_id) {
+				case "plusbutton":
+					nbr.textContent++;
+					break;
+				case "minusbutton":
+					nbr.textContent--;
+					break;
+			}
+
+			nbr.style.color = (nbr.textContent % 2 == 0) ? "red" : "black";
+			nbr.style.fontStyle = (nbr.textContent % 3 == 0) ? "italic" : "normal";
+		}
+	</script>
+</head>
+<body>
+	<div style="background-color: rgb(245, 245, 245); width: 30%; height: 115px; margin: auto; text-align: center; padding-top: 10px;">
+		<div style="text-align: center; font-size: 56pt;">
+			<button id="minusbutton" onclick="button_click(this.id)">-</button>
+			<label id="numberlabel" style="color: red; font-style: italic;">0</label>
+			<button id="plusbutton" onclick="button_click(this.id)">+</button>
+		</div>
+	</div>
+</body>
+</html>

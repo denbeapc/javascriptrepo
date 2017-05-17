@@ -1,2 +1,2 @@
-# Javascript repo README
+# Javascript repo readme
 

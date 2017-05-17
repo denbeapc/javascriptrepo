@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Javascript Basic</title>
+	<title>Javascript</title>
 
 	<script lang="javascript">
-		function alertMe(message) {
-			alert(message);
+		function button_click() {
+			var nbr = document.getElementById("nbr").value;
+
+			alert(nbr);
 		}
 	</script>
 </head>
 <body>
-	<p>Click the button! <button onclick="alertMe('whaddup')">Click me!</button></p>
+	<input id="nbr" type="text" placeholder="Enter a number" />
+	<button onclick="button_click()">Click me!</button>
 </body>
 </html>
