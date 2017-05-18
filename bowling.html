@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bowling Scores</title>
+
+	<style>
+		table, tr, td {
+	    	border: 1px solid black;
+	    	border-collapse: collapse;
+		}
+	</style>
+
+	<script lang="javascript">
+		var currentSubIndex;
+		var currentFrameIndex;
+
+		var scoreStr;
+		var frameStr;
+
+		var subscore;
+		var framescore;
+
+		var scores = []
+
+		function getTotalScore() {
+			var totalScore = 0;
+			currentFrameIndex = 1
+
+			for(var idx = 0, currentSubIndex = 1; currentSubIndex <= 20; idx++, currentSubIndex++) {
+				scoreStr = "score" + currentSubIndex;
+				subscore = document.getElementById(scoreStr);
+
+				if(checkScoreValidity(parseInt(subscore.value))) {
+					scores[idx] = parseInt(subscore.value);
+
+					if(currentSubIndex == 1) {
+						totalScore += parseInt(subscore.value);
+					} else if(scores[idx] + scores[idx-1] <= 10) {
+						totalScore += parseInt(subscore.value);
+					} else {
+						totalScore = "Error! Scores must only total to 10 per frame!";
+						break;
+					}
+				} else {
+					totalScore = "Error! Scores must be either X, /, or of an integer 0-10!";
+					break;
+				}
+
+				if(currentSubIndex % 2 == 0) {
+					frameStr = "frame" + currentFrameIndex;
+					framescore = document.getElementById(frameStr);
+
+					framescore.innerHTML = scores[idx] + scores[idx-1];
+
+					currentFrameIndex++;
+				}
+			}
+
+			document.getElementById("totalscore").innerHTML = totalScore;
+		}
+
+		function checkScoreValidity(score) {
+			var valid = (parseInt(score) >= 0 && parseInt(score) <= 10) ? true : false;
+			if(valid == false && (score == "X" || score == "/")) {
+				valid = true;
+			} else if(valid == false && score == null) {
+				valid = false;
+			}
+
+			return valid;
+		}
+	</script>
+</head>
+<body>
+	<h2 style="text-align: center;">Bowling</h2>
+
+	<div>
+		<table width="100%" cellpadding="2" cellspacing="2">
+			<tr>
+				<td colspan="2">1</td>
+				<td colspan="2">2</td>
+				<td colspan="2">3</td>
+				<td colspan="2">4</td>
+				<td colspan="2">5</td>
+				<td colspan="2">6</td>
+				<td colspan="2">7</td>
+				<td colspan="2">8</td>
+				<td colspan="2">9</td>
+				<td colspan="2">10</td>
+			</tr> 
+			<tr id="scores">
+				<td><input id="score1" type="text" size="4" /></td>
+				<td><input id="score2" type="text" size="4" /></td>
+				<td><input id="score3" type="text" size="4" /></td>
+				<td><input id="score4" type="text" size="4" /></td>
+				<td><input id="score5" type="text" size="4" /></td>
+				<td><input id="score6" type="text" size="4" /></td>
+				<td><input id="score7" type="text" size="4" /></td>
+				<td><input id="score8" type="text" size="4" /></td>
+				<td><input id="score9" type="text" size="4" /></td>
+				<td><input id="score10" type="text" size="4" /></td>
+				<td><input id="score11" type="text" size="4" /></td>
+				<td><input id="score12" type="text" size="4" /></td>
+				<td><input id="score13" type="text" size="4" /></td>
+				<td><input id="score14" type="text" size="4" /></td>
+				<td><input id="score15" type="text" size="4" /></td>
+				<td><input id="score16" type="text" size="4" /></td>
+				<td><input id="score17" type="text" size="4" /></td>
+				<td><input id="score18" type="text" size="4" /></td>
+				<td><input id="score19" type="text" size="4" /></td>
+				<td><input id="score20" type="text" size="4" /></td>
+			</tr>
+			<tr id="totalscorerow" height="60" style="text-align: center;">
+				<td colspan="2"><h3 id="frame1">0</h3></td>
+				<td colspan="2"><h3 id="frame2">0</h3></td>
+				<td colspan="2"><h3 id="frame3">0</h3></td>
+				<td colspan="2"><h3 id="frame4">0</h3></td>
+				<td colspan="2"><h3 id="frame5">0</h3></td>
+				<td colspan="2"><h3 id="frame6">0</h3></td>
+				<td colspan="2"><h3 id="frame7">0</h3></td>
+				<td colspan="2"><h3 id="frame8">0</h3></td>
+				<td colspan="2"><h3 id="frame9">0</h3></td>
+				<td colspan="2"><h3 id="frame10">0</h3></td>
+			</tr>
+		</table>
+	</div>
+	<div id="buttons" style="padding: 10px;">
+		<button onclick="getTotalScore()">Finish Scoring</button>
+		<label id="totalscore" />
+	</div>
+</body>
+</html>
