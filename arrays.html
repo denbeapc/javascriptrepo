@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript: Arrays and Objects</title>
+
+	<style>
+		#enter_grade {
+			width: 30%;
+			margin: auto;
+
+			padding: 10px;
+		}
+
+		#grade_display {
+			width: 30%;
+			height: 300px;
+			margin: auto;
+			overflow-y: auto;
+
+			padding: 10px;
+
+			background-color: rgb(240, 240, 240);
+		}
+
+		#avg {
+			margin: auto;
+			padding: 10px;
+		}
+
+		#curve {
+			margin: auto;
+			padding: 10px;
+		}
+	</style>
+
+	<script lang="javascript">
+		var gradeArr = [];
+		var curveValue;
+
+		function AddGrade_Click() {
+			var grade = document.getElementById("inGrade").value;
+			// TODO MUST convert from string to number
+			// TODO SHOULD edit the grade here.
+			gradeArr.push(parseInt(grade));
+			displayGrades(gradeArr);
+		}
+
+		function displayGrades(grades) {
+			var tbody = document.getElementById("grade_table");
+			tbody.innerHTML = "";
+			var newrow, studentcell, gradecell;
+
+			for(var idx = 0; idx < grades.length; idx++) {
+				newrow = tbody.insertRow();
+				studentcell = newrow.insertCell();
+				gradecell = newrow.insertCell();
+
+				studentcell.innerHTML = idx;
+				gradecell.innerHTML = grades[idx] + "%";
+			}
+
+			calcAverage(grades);
+			isThereACurve(grades);
+		}
+
+		function updateDisplay(grades) {
+			var tbody = document.getElementById("grade_table");
+			tbody.innerHTML = "";
+			var newrow, studentcell, gradecell;
+
+			for(var idx = 0; idx < grades.length; idx++) {
+				newrow = tbody.insertRow();
+				studentcell = newrow.insertCell();
+				gradecell = newrow.insertCell();
+
+				studentcell.innerHTML = idx;
+				gradecell.innerHTML = grades[idx] + "%";
+			}
+		}
+
+		function calcAverage(grades) {
+			var total = 0.0;
+			for(var idx = 0; idx < grades.length; idx++) {
+				total += grades[idx];
+			}
+
+			var avgGrade = (total / grades.length).toFixed(1);
+			var divCtrl = document.getElementById("avg");
+			divCtrl.innerHTML = "<label>Average: " + avgGrade + "%</label>";
+		}
+
+		function isThereACurve(grades) {
+			var curveBool = true;
+			var highestGrade = 0;
+
+			var idx = 0;
+			while (curveBool && idx < grades.length) {
+				if(grades[idx] === 100) { curveBool = false; } 
+				else if(grades[idx] > highestGrade) {	highestGrade = grades[idx];	}
+				idx++;
+			}
+
+			if(curveBool) {
+				curveValue = ((100 - highestGrade) * 0.8).toFixed(1);
+
+				setGrades(grades);
+				document.getElementById("curve").innerHTML = "<label>Curve? Yes, by " + curveValue + "%</label>";
+				document.getElementById("curveButton").disabled = false;
+			} else { 
+				document.getElementById("curve").innerHTML = "<label>Curve? No</label>"; 
+				document.getElementById("curveButton").disabled = true;
+			}
+		}
+
+		function getGrades() {
+			return gradesArr;
+		}
+
+		function setGrades(grades) {
+			gradesArr = grades;
+		}
+
+		function curveGrades() {
+			for(idx = 0; idx < gradesArr.length; idx++) {
+				gradesArr[idx] += parseInt(curveValue);
+			}
+
+			updateDisplay(gradesArr);
+			document.getElementById("curveButton").disabled = true;
+		}
+	</script>
+</head>
+<body>
+	<h3 style="text-align: center;">Final Grades</h3>
+
+	<div id="enter_grade">
+		<table id="add_grade_table" cellpadding="2" cellspacing="2" width="100%">
+			<tr>
+				<td><input id="inGrade" type="text" placeholder="Grades" size="15" /></td>
+				<td><button onclick="AddGrade_Click()">Add Grade</button></td>
+				<td><button id="curveButton" disabled="true" onclick="curveGrades()">Apply Curve</button></td>
+			</tr>
+		</table>
+	</div>
+	<div id="grade_display">
+		<table style="border: 1px solid black;" cellpadding="3" cellspacing="2" width="100%">
+			<thead style="background-color: black; color: white;">
+				<tr>
+					<td>Student</td>
+					<td>Final Grades</td>
+				</tr>
+			</thead>
+			<tbody id="grade_table">
+			</tbody>
+		</table>
+		<div id="avg">
+			<label>Average: </label>
+		</div>
+		<div id="curve">
+			<label>Curve? </label>
+		</div>
+	</div>
+</body>
+</html>

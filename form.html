@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript</title>
+
+	<style>
+		td label {
+			display: block;
+			text-align: right;
+		}
+	</style>
+
+	<script lang="javascript">
+		function submit_clicked() {
+			var name = document.getElementById("name").value;
+			var address = document.getElementById("address").value;
+			var csz = document.getElementById("csz").value;
+
+			console.log(name, address, csz);
+		}
+	</script>
+</head>
+<body>
+	<form method="GET" action="">
+		<table>
+			<tr>
+				<td><label>Name: </label></td>
+				<td><input id="name" type="text" placeholder="First and Last Name" /></td>
+			</tr>
+			<tr>
+				<td><label>Address: </label></td>
+				<td><input id="address" type="text" size="30" placeholder="Address" /></td>
+			</tr>
+			<tr>
+				<td><label>City, State, Zip: </label></td>
+				<td><input id="csz" type="text" size="30" placeholder="City, State, Zip" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<button type="button" onclick="submit_clicked()">Submit</button>
+					&nbsp;
+					<button type="button">Cancel</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
