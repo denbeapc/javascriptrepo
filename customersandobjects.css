@@ -1,0 +1,11 @@
+#table {
+	width: 55%;
+	margin: auto;
+
+	border: 1px solid black;
+}
+
+#tableHeaders {
+	background-color: black;
+	color: white;
+}
