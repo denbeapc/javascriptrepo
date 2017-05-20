@@ -5,65 +5,39 @@
 	<script src="bowling.js" type="text/javascript"></script>
 	<link href="bowlingstylesheet.css" type="text/css" rel="stylesheet" />
 </head>
-<body>
-	<h2 style="text-align: center;">Bowling</h2>
+<body onload="scoresheetInit()">
+	<h1 id="header">Bowling</h1>
 
-	<div id="scoreButtons" style="padding: 10px;">
-		<button id="0" onclick="addScore(this.id, 0)">0</button>
-		<button id="1" onclick="addScore(this.id, 1)">1</button>
-		<button id="2" onclick="addScore(this.id, 2)">2</button>
-		<button id="3" onclick="addScore(this.id, 3)">3</button>
-		<button id="4" onclick="addScore(this.id, 4)">4</button>
-		<button id="5" onclick="addScore(this.id, 5)">5</button>
-		<button id="6" onclick="addScore(this.id, 6)">6</button>
-		<button id="7" onclick="addScore(this.id, 7)">7</button>
-		<button id="8" onclick="addScore(this.id, 8)">8</button>
-		<button id="9" onclick="addScore(this.id, 9)">9</button>
-		<button id="10" onclick="addScore(this.id, 10)">10</button>
+	<div id="pageContent">
+		<div id="scoreButtons">
+			<button id="0" onclick="addScore(0)">0</button>
+			<button id="1" onclick="addScore(1)">1</button>
+			<button id="2" onclick="addScore(2)">2</button>
+			<button id="3" onclick="addScore(3)">3</button>
+			<button id="4" onclick="addScore(4)">4</button>
+			<button id="5" onclick="addScore(5)">5</button>
+			<button id="6" onclick="addScore(6)">6</button>
+			<button id="7" onclick="addScore(7)">7</button>
+			<button id="8" onclick="addScore(8)">8</button>
+			<button id="9" onclick="addScore(9)">9</button>
+			<button id="10" onclick="addScore(10)">10</button>
+		</div>
+
+		<div style="text-align: center; width: 75%; margin: auto;">
+			<table id="scoreSheet" width="100%" cellpadding="2" cellspacing="2">
+				<tr id="headers" style="text-align: center;">
+				</tr>
+				<tr id="scores" style="text-align: right;">
+				</tr>
+				<tr id="frames" height="60" style="text-align: center;">
+				</tr>
+			</table>
+		</div>
+		<div style="padding: 10px;">
+			<label id="totalscore" />
+		</div>
 	</div>
 
-	<div>
-		<table id="scoreSheet" width="100%" cellpadding="2" cellspacing="2">
-			<tr id="headers" style="text-align: center;">
-				<td colspan="2"><button onclick="selectFrame(1)">1</button></td>
-				<td colspan="2"><button onclick="selectFrame(2)">2</button></td>
-				<td colspan="2"><button onclick="selectFrame(3)">3</button></td>
-				<td colspan="2"><button onclick="selectFrame(4)">4</button></td>
-				<td colspan="2"><button onclick="selectFrame(5)">5</button></td>
-				<td colspan="2"><button onclick="selectFrame(6)">6</button></td>
-				<td colspan="2"><button onclick="selectFrame(7)">7</button></td>
-				<td colspan="2"><button onclick="selectFrame(8)">8</button></td>
-				<td colspan="2"><button onclick="selectFrame(9)">9</button></td>
-				<td colspan="2"><button onclick="selectFrame(10)">10</button></td>
-			</tr> 
-			<tr id="scores">
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-				<td><p></p></td><td><p></p></td>
-			</tr>
-			<tr id="frameScoreRow" height="60" style="text-align: center;">
-				<td colspan="2"><h3 id="frame1">0</h3></td>
-				<td colspan="2"><h3 id="frame2">0</h3></td>
-				<td colspan="2"><h3 id="frame3">0</h3></td>
-				<td colspan="2"><h3 id="frame4">0</h3></td>
-				<td colspan="2"><h3 id="frame5">0</h3></td>
-				<td colspan="2"><h3 id="frame6">0</h3></td>
-				<td colspan="2"><h3 id="frame7">0</h3></td>
-				<td colspan="2"><h3 id="frame8">0</h3></td>
-				<td colspan="2"><h3 id="frame9">0</h3></td>
-				<td colspan="2"><h3 id="frame10">0</h3></td>
-			</tr>
-		</table>
-	</div>
-	<div style="padding: 10px;">
-		<label id="totalscore" />
-	</div>
+	<h5 id="footer">Copyright &copy 2017 Pierson D'Enbeau</h5>
 </body>
 </html>
