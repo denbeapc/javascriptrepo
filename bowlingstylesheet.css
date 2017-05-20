@@ -1,0 +1,13 @@
+table, tr, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#scores {
+	text-align: right;
+}
+
+#headers button {
+	font-weight: bold;
+	background: transparent;
+}

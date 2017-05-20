@@ -2,148 +2,53 @@
 <html>
 <head>
 	<title>Bowling Scores</title>
-
-	<style>
-		table, tr, td {
-	    	border: 1px solid black;
-	    	border-collapse: collapse;
-		}
-	</style>
-
-	<script lang="javascript">
-		var currentSubIndex;
-		var currentFrameIndex;
-
-		var scoreStr;
-		var frameStr;
-
-		var subscore;
-		var framescore;
-
-		var scores = []
-		
-
-		function getTotalScore() {
-			var totalScore = 0;
-			currentFrameIndex = 1
-
-			// Loop through the subscores
-			for(var idx = 0, currentSubIndex = 1; currentSubIndex <= 20; idx++, currentSubIndex++) {
-				scoreStr = "score" + currentSubIndex;
-				subscore = document.getElementById(scoreStr);
-
-				// Calculate the individual subscore of the frame
-				totalScore = calculateTotalScore(subscore, currentSubIndex, currentFrameIndex, idx, totalScore);
-				if(typeof totalScore == "string") {
-					break;
-				}
-			}
-
-			document.getElementById("totalscore").innerHTML = totalScore;
-		}
-
-		function isStrike(subscore, currentSubIndex, currentFrameIndex, idx, totalScore) {
-			var previousSub = "score" + (currentSubIndex-1);
-			previousSub.disabled = true;
-
-			var nextSubscore1 = "score" + (currentSubIndex+1);
-			var nextSubscore2 = "score" + (currentSubIndex+2);
-			if(checkScoreValidity(parseInt(nextSubscore1.value)) && checkScoreValidity(parseInt(nextSubscore2.value)) 
-				&& (parseInt(nextSubscore1.value) + parseInt(nextSubscore2.value <= 10))) {
-				var nextFrameScore = parseInt(nextSubscore1.value) + parseInt(nextSubscore1.value);
-			} else {
-				return "Error! Scores must be either X, /, or of an integer 0-10!"
-			}
-
-			return totalScore;
-		}
-
-		/*function isSpare() {
-
-		}*/
-
-		function calculateTotalScore(subscore, currentSubIndex, currentFrameIndex, idx, totalScore) {
-			if(checkScoreValidity(parseInt(subscore.value))) {
-				scores[idx] = parseInt(subscore.value);
-
-				if(currentSubIndex % 2 != 0) {
-					totalScore += parseInt(subscore.value);
-				} else if(scores[idx] + scores[idx-1] <= 10) {
-					totalScore += parseInt(subscore.value);
-				} else {
-					return "Error! Scores must only total to 10 per frame!";
-					// maybe return true or false to break the loop
-				}
-			} else {
-				return "Error! Scores must be either X, /, or of an integer 0-10!";
-				// maybe return true or false to break the loop
-			}
-
-			// Tally score and put it in main frame
-			if(currentSubIndex % 2 == 0) {
-				frameStr = "frame" + currentFrameIndex;
-				framescore = document.getElementById(frameStr);
-
-				framescore.innerHTML = scores[idx] + scores[idx-1];
-
-				currentFrameIndex++;
-			}
-
-			return totalScore;
-		}
-
-		function checkScoreValidity(score) {
-			var valid = (parseInt(score) >= 0 && parseInt(score) <= 10) ? true : false;
-			if(valid == false && (score == "X" || score == "/")) {
-				valid = true;
-			} else if(valid == false && score == null) {
-				valid = false;
-			}
-
-			return valid;
-		}
-	</script>
+	<script src="bowling.js" type="text/javascript"></script>
+	<link href="bowlingstylesheet.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 	<h2 style="text-align: center;">Bowling</h2>
 
+	<div id="scoreButtons" style="padding: 10px;">
+		<button id="0" onclick="addScore(this.id, 0)">0</button>
+		<button id="1" onclick="addScore(this.id, 1)">1</button>
+		<button id="2" onclick="addScore(this.id, 2)">2</button>
+		<button id="3" onclick="addScore(this.id, 3)">3</button>
+		<button id="4" onclick="addScore(this.id, 4)">4</button>
+		<button id="5" onclick="addScore(this.id, 5)">5</button>
+		<button id="6" onclick="addScore(this.id, 6)">6</button>
+		<button id="7" onclick="addScore(this.id, 7)">7</button>
+		<button id="8" onclick="addScore(this.id, 8)">8</button>
+		<button id="9" onclick="addScore(this.id, 9)">9</button>
+		<button id="10" onclick="addScore(this.id, 10)">10</button>
+	</div>
+
 	<div>
-		<table width="100%" cellpadding="2" cellspacing="2">
-			<tr>
-				<td colspan="2">1</td>
-				<td colspan="2">2</td>
-				<td colspan="2">3</td>
-				<td colspan="2">4</td>
-				<td colspan="2">5</td>
-				<td colspan="2">6</td>
-				<td colspan="2">7</td>
-				<td colspan="2">8</td>
-				<td colspan="2">9</td>
-				<td colspan="2">10</td>
+		<table id="scoreSheet" width="100%" cellpadding="2" cellspacing="2">
+			<tr id="headers" style="text-align: center;">
+				<td colspan="2"><button onclick="selectFrame(1)">1</button></td>
+				<td colspan="2"><button onclick="selectFrame(2)">2</button></td>
+				<td colspan="2"><button onclick="selectFrame(3)">3</button></td>
+				<td colspan="2"><button onclick="selectFrame(4)">4</button></td>
+				<td colspan="2"><button onclick="selectFrame(5)">5</button></td>
+				<td colspan="2"><button onclick="selectFrame(6)">6</button></td>
+				<td colspan="2"><button onclick="selectFrame(7)">7</button></td>
+				<td colspan="2"><button onclick="selectFrame(8)">8</button></td>
+				<td colspan="2"><button onclick="selectFrame(9)">9</button></td>
+				<td colspan="2"><button onclick="selectFrame(10)">10</button></td>
 			</tr> 
 			<tr id="scores">
-				<td><input id="score1" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score2" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score3" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score4" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score5" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score6" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score7" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score8" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score9" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score10" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score11" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score12" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score13" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score14" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score15" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score16" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score17" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score18" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score19" type="text" size="4" maxlength="1" /></td>
-				<td><input id="score20" type="text" size="4" maxlength="1" /></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
+				<td><p></p></td><td><p></p></td>
 			</tr>
-			<tr id="totalscorerow" height="60" style="text-align: center;">
+			<tr id="frameScoreRow" height="60" style="text-align: center;">
 				<td colspan="2"><h3 id="frame1">0</h3></td>
 				<td colspan="2"><h3 id="frame2">0</h3></td>
 				<td colspan="2"><h3 id="frame3">0</h3></td>
@@ -157,8 +62,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="buttons" style="padding: 10px;">
-		<button onclick="getTotalScore()">Finish Scoring</button>
+	<div style="padding: 10px;">
 		<label id="totalscore" />
 	</div>
 </body>
