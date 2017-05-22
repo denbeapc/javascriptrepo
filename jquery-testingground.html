@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQuery Testing</title>
+
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+	<script lang="javascript">
+		$().ready(function() {
+			$("button").click(function() {
+				var btn = $(this).text();
+				var nbr = parseInt($("#nbr").text());
+
+				switch(btn) {
+					case "+":
+						nbr++;
+						break;
+					case "-":
+						nbr--;
+						break;
+					case "Reset":
+						nbr = 0;
+						break;
+				}
+
+				(nbr % 2 == 0) ? $("#nbr").css("color", "red") : $("#nbr").css("color", "black");
+				(nbr % 3 == 0) ? $("#nbr").css("font-style", "italic") : $("#nbr").css("font-style", "normal");
+
+				var nbrStr = "" + nbr;
+				var sum = 0;
+				for(var idx = 0; idx < nbrStr.length; idx++) {
+					sum += parseInt(nbrStr.charAt(idx));
+				}
+
+				(sum == 7) ? $("#nbr").css("font-weight", "bolder") : $("#nbr").css("font-weight", "normal");
+				
+				$("#nbr").text(nbr);
+			});
+		});
+	</script>
+
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		body, html {
+			background-color: #bad4ff;
+			margin: 0px;
+			height: 100%;
+		}
+
+		#header {
+			text-align: center;
+			position: fixed;
+			color: white;
+			background-color: #647ea9;
+			width: 100%;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			top: 0;
+			margin-top: 0;
+
+			text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000; 
+		}
+
+		#footer {
+			text-align: center;
+			position: fixed;
+			color: white;
+			background-color: #647ea9;
+			width: 100%;
+			bottom: 0;
+			margin-bottom: 0;
+
+			text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000; 
+		}
+
+		#pageContent {
+			background-color: #ffffff;
+			width: 80%;
+			height: 100%;
+			margin: auto;
+			overflow-y: auto;
+
+			font-size: 22pt;
+
+			padding-top: 60px;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-bottom: 10px;
+
+			border-left: 2px solid #647ea9;
+			border-right: 2px solid #647ea9;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="header">JQuery: Number Counter</h1>
+
+	<div id="pageContent">
+		<table style="width: 30%; margin: auto; text-align: center;">
+			<tbody>
+				<tr>
+					<td><button>+</button></td>
+					<td colspan="2"><p id="nbr" style="color: red; font-style: italic; font-weight: normal;">0</p></td>
+					<td><button>-</button></td>
+				</tr>
+				<tr>
+					<td colspan="4"><button style="width: 25%;">Reset</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<h5 id="footer">Copyright &copy; 2017 Pierson D'Enbeau</h5>
+</body>
+</html>
