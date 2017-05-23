@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+	<script lang="javascript">
+		$().ready(function() {
+			$("#go").click(function() {
+				// SELECT list
+				var selectedGrade = $("#grade").val();
+				$("#select").text(selectedGrade);
+
+				// PASSWORD display
+				var thePassword = $("#pwd").val();
+				$("#pwdDisplay").text(thePassword);
+
+				// RADIO buttons
+				var selectedRadioButton = $("input[name='grades']:checked").val();
+				$("#radioDisplay").text(selectedRadioButton);
+
+				// CHECKBOX display
+				var knowCS = $("#cs").is(":checked");
+				var knowJava = $("#java").is(":checked");
+				$("#lblcs").text((knowCS) ? "Yes" : "No");
+				$("#lbljava").text((knowJava) ? "Yes" : "No");
+			});
+		});
+	</script>
+
+	<style>
+		div {
+			padding-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<button id="go">Display Value</button>
+		<!-- SELECT/OPTION -->
+		<select id="grade" name="grade">
+			<option value="A">100 - 92</option>
+			<option value="B">91 - 83</option>
+			<option value="C">82 - 70</option>
+			<option value="D">69 - 65</option>
+			<option value="F">64 - 0</option>
+		</select>
+		<label id="select"></label>
+	</div>
+	<div>
+		<!-- PASSWORD -->
+		<label>Password:</label>
+		<input id="pwd" type="password" />
+		<label id="pwdDisplay"></label>
+	</div>
+	<div>
+		<!-- RADIO BUTTONS -->
+		<label>A</label>
+		<input type="radio" value="A" name="grades" checked />
+		<label>B</label>
+		<input type="radio" value="B" name="grades" />
+		<label>C</label>
+		<input type="radio" value="C" name="grades" />
+		<label id="radioDisplay"></label>
+	</div>
+	<div>
+		<!-- CHECK BOXES -->
+		<input type="checkbox" id="cs" value="1">I know C#.NET</input><br />
+		<input type="checkbox" id="java" value="1">I know Java</input>
+		<p>I know C#.NET: <label id="lblcs"></label></p>
+		<p>I know Java: <label id="lbljava"></label></p>
+	</div>
+</body>
+</html>
