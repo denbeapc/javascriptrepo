@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+	<script lang="javascript">
+	$().ready(function() {
+		$("#pageContent").hide(true);
+		var profilePwd = "";
+
+		$("#passwordBtn").click(function() {
+			$("#verifyPassword").css("background-color", "white")
+			var origPwd = $("#firstPassword").val();
+			var verifyPwd = $("#verifyPassword").val();
+
+			if(origPwd === verifyPwd) {
+				$("#pageContent").show(true);
+				$("#verifyPassword").hide(true);
+				$("#firstPassword").hide(true);
+				$("#passwordBtn").hide(true);
+				$("#headerTitle").text("Welcome! Enter your information here!");
+
+				profilePwd = verifyPwd;
+			} else {
+				$("#verifyPassword").css("background-color", "red");
+			}
+		});
+
+		$("#infoBtn").click(function() {
+			var name = $("#name").val();
+			var phone = $("#phone").val();
+			var email = $("#email").val();
+
+			var city = $("#location").val();
+			var state = $("input[name='state']:checked").val();
+
+			var metal = ($("#metal").is(":checked")) ? "I like heavy metal." : "I do not like heavy metal.";
+			var rock = ($("#rock").is(":checked")) ? "I like rock & roll." : "I do not like rock & roll.";
+			var country = ($("#country").is(":checked")) ? "I like country." : "I do not like country.";
+			var hiphop = ($("#hiphop").is(":checked")) ? "I like hip-hop/rap." : "I do not like hip-hop/rap.";
+			var classical = ($("#classical").is(":checked")) ? "I like classical." : "I do not like classical.";
+			var bluegrass = ($("#bluegrass").is(":checked")) ? "I like bluegrass." : "I do not like bluegrass.";
+
+			$("#headerTitle").text(name);
+			$("#contactinfo").text(phone + " " + email);
+			$("#locationinfo").text("Lives in " + city + ", " + state);
+			$("#musicinfo").text(metal + " " + rock + " " + country + " " + hiphop + " " + classical + " " + bluegrass);
+
+			var profile = { 
+				password: profilePwd,
+				name: name,
+				phone: phone,
+				email: email,
+				city: city,
+				state: state,
+				music: [ metal, rock, country, hiphop, classical, bluegrass ]
+			}
+
+			console.log(profile);
+		});
+	});
+	</script>
+
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		body, html {
+			background-color: #bad4ff;
+			margin: 0px;
+			height: 100%;
+		}
+
+		#header {
+			text-align: center;
+			position: fixed;
+			color: white;
+			background-color: #647ea9;
+			width: 100%;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			top: 0;
+			margin-top: 0;
+
+			text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000; 
+		}
+
+		#footer {
+			text-align: center;
+			position: fixed;
+			color: white;
+			background-color: #647ea9;
+			width: 100%;
+			bottom: 0;
+			margin-bottom: 0;
+
+			text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000; 
+		}
+
+		#pageContent {
+			background-color: #ffffff;
+			width: 80%;
+			height: 100%;
+			margin: auto;
+			overflow-y: auto;
+
+			padding-top: 130px;
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-bottom: 10px;
+
+			border-left: 2px solid #647ea9;
+			border-right: 2px solid #647ea9;
+		}
+
+		#personalInfo {
+			width: 30%;
+			display: table-cell;
+		}
+
+		#infoDisplay {
+			width: 65%;
+			display: table-cell;
+		}
+
+		#subheader {
+			text-align: center;
+			color: white;
+			background-color: #647ea9;
+			width: 100%;
+			padding-top: 10px;
+			padding-bottom: 10px;
+
+			text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000; 
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<h1 id="headerTitle">Sign up!</h1>
+		<input id="firstPassword" type="password" />
+		<input id="verifyPassword" type="password" />
+		<button id="passwordBtn">Enter</button>
+	</div>
+
+	<div id="pageContent">
+		<div id="personalInfo">
+			<label>Name </label>
+			<input id="name" type="text" placeholder="First and Last" /><br />
+			<label>Phone Number </label>
+			<input id="phone" type="text" placeholder="(xxx) xxx-xxxx" /><br />
+			<label>Email </label>
+			<input id="email" type="text" placeholder="youremail@email.com" /><br /><br />
+
+			<label>City </label>
+			<select id="location" name="location">
+				<option value="Columbus">Columbus</option>
+				<option value="Cleveland">Cleveland</option>
+				<option value="Cincinnati">Cincinnati</option>
+				<option value="Indianapolis">Indianapolis</option>
+				<option value="Lexington">Lexington</option>
+			</select><br />
+
+			<input id="oh" type="radio" value="OH" name="state" checked>OH</input><br />
+			<input id="in" type="radio" value="IN" name="state">IN</input><br />
+			<input id="ky" type="radio" value="KY" name="state">KY</input><br /><br />
+
+			<input type="checkbox" id="metal" value="1">I like heavy metal</input><br />
+			<input type="checkbox" id="rock" value="1">I like rock & roll</input><br />
+			<input type="checkbox" id="country" value="1">I like country</input><br />
+			<input type="checkbox" id="hiphop" value="1">I like hip-hop/rap</input><br />
+			<input type="checkbox" id="classical" value="1">I like classical</input><br />
+			<input type="checkbox" id="bluegrass" value="1">I like bluegrass</input><br /><br />
+
+			<button id="infoBtn">Submit</button>
+		</div>
+		<div id="infoDisplay">
+			<h3 id="subheader">Contact Info</h3>
+			<p id="contactinfo" style="text-align: center;"></p>
+			<h3 id="subheader">Personal Info</h3>
+			<p id="locationinfo"></p>
+			<p id="musicinfo"></p>
+		</div>
+	</div>
+
+	<h5 id="footer">Copyright &copy; 2017 Pierson D'Enbeau</h5>
+</body>
+</html>
